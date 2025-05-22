@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WhatsApp Session Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📱 Scan QR to Generate WhatsApp Session</h1>
+    <div id="qr-container">
+      <p>Waiting for QR code...</p>
+    </div>
+    <div id="session-id"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io()
+
+    socket.on('qr', (qrData) => {
+      document.getElementById('qr-container').innerHTML =
+        `<img src="${qrData}" alt="QR Code">`
+    })
+
+    socket.on('session-id', (id) => {
+      document.getElementById('session-id').innerHTML =
+        `<p>✅ SESSION_ID: <b>${id}</b></p>`
+    })
+  </script>
+</body>
+</html>
