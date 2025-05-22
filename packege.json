@@ -1,7 +1,7 @@
 {
-  "name": "web-session-generator",
+  "name": "paircode-generator",
   "version": "1.0.0",
-  "description": "Web-based WhatsApp session generator and Mega.nz uploader",
+  "description": "WhatsApp Pair Code Generator + Mega.nz uploader",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -11,7 +11,6 @@
     "express": "^4.18.2",
     "fs-extra": "^11.2.0",
     "megajs": "^1.0.6",
-    "qrcode": "^1.5.1",
     "socket.io": "^4.7.2"
   }
 }
