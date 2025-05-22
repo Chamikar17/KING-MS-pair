@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>WhatsApp Session Generator</title>
+  <title>WhatsApp Pair Code Generator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>📱 Scan QR to Generate WhatsApp Session</h1>
-    <div id="qr-container">
-      <p>Waiting for QR code...</p>
-    </div>
+    <h1>🔐 WhatsApp Pair Code</h1>
+    <div id="code"><p>Generating code...</p></div>
     <div id="session-id"></div>
   </div>
 
@@ -18,14 +16,12 @@
   <script>
     const socket = io()
 
-    socket.on('qr', (qrData) => {
-      document.getElementById('qr-container').innerHTML =
-        `<img src="${qrData}" alt="QR Code">`
+    socket.on('pair-code', code => {
+      document.getElementById('code').innerHTML = `<h2>${code}</h2><p>Use this code in your WhatsApp → Linked Devices</p>`
     })
 
-    socket.on('session-id', (id) => {
-      document.getElementById('session-id').innerHTML =
-        `<p>✅ SESSION_ID: <b>${id}</b></p>`
+    socket.on('session-id', id => {
+      document.getElementById('session-id').innerHTML = `<p>✅ SESSION_ID: <b>${id}</b></p>`
     })
   </script>
 </body>
