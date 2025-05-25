@@ -34,6 +34,7 @@ h1 {
 button {
   background-color: #ff1a1a; /* Bright red */
   border: none;
+  matgin: 20px 0;
   color: white;
   padding: 12px 24px;
   font-size: 18px;
