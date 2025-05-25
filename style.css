@@ -32,7 +32,7 @@ h1 {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #ff1a1a; /* Bright red */
   border: none;
   color: white;
   padding: 12px 24px;
@@ -41,7 +41,8 @@ button {
   cursor: pointer;
   margin: 10px 0;
   width: 100%;
-  transition: background-color 0.3s;
+  transition: 0.3s;
+  box-shadow: 0 0 10px #ff1a1a, 0 0 20px #ff1a1a; /* 🔴 red glow */
 }
 
 button:hover:not(:disabled) {
