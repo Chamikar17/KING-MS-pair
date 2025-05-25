@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <title>Adsterra Ad Player</title>
+  <style>
+    body {
+      background-color: #2ecc71; /* කොළ පාට */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    h1 {
+      font-size: 32px;
+    }
+    #playBtn, #finalBtn {
+      background-color: white;
+      color: green;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    #playBtn.clicked {
+      background-color: red;
+      color: white;
+    }
+    #message, #finalBtn {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
 
+  <h1>Ads Play Panel</h1>
+  <button id="playBtn">Play Ad</button>
+  <p id="message">Ad එක තප්පර 15 ක් බලා මෙතනට පැමිණෙන්න...</p>
+  <button id="finalBtn">Play Ad Now</button>
+
+  <script>
+    const playBtn = document.getElementById('playBtn');
+    const message = document.getElementById('message');
+    const finalBtn = document.getElementById('finalBtn');
+
+    playBtn.addEventListener('click', () => {
+      playBtn.classList.add('clicked');
+      playBtn.disabled = true;
+      message.style.display = 'block';
+
+      setTimeout(() => {
+        finalBtn.style.display = 'inline-block';
+      }, 15000); // තප්පර 15 ක්
+    });
+
+    finalBtn.addEventListener('click', () => {
+      // Adsterra Ad Script Trigger
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = '//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js';
+      document.body.appendChild(script);
+
+      finalBtn.disabled = true;
+      finalBtn.textContent = "Ad Loading...";
+    });
+  </script>
+
+</body>
+</html>
