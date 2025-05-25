@@ -6,7 +6,7 @@ let points = 0;
 let adWindow = null;
 let timer = null;
 let count = 0;
-const adDuration = 15; // seconds
+const adDuration = 17; // seconds
 let pointAdded = false;
 
 watchBtn.addEventListener("click", () => {
