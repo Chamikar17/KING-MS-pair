@@ -52,6 +52,7 @@ button:hover:not(:disabled) {
 
 .owner-btn {
   margin-bottom: 20px;
+  display: block;
   background-color: #6a00ff; /* Purple base */
   color: #fff;
   padding: 12px 24px;
