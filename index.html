@@ -1,110 +1,104 @@
-<!DOCTYPE html>
-<html lang="si">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ad Play Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ad Earnings Tracker</title>
   <style>
     body {
-      background-color: #f9f9f9;
+      font-family: sans-serif;
+      background-color: #f2f2f2;
       text-align: center;
       padding: 50px;
-      font-family: sans-serif;
     }
-
-    #line {
+    .progress-bar {
+      width: 100%;
+      background-color: #ddd;
+      height: 20px;
+      margin: 20px 0;
+    }
+    .progress {
+      height: 100%;
+      background-color: red;
       width: 0%;
-      height: 10px;
-      background: red;
-      margin: 20px auto;
-      transition: width 0.5s;
     }
-
-    .btn {
-      padding: 15px 30px;
-      font-size: 18px;
-      background-color: green;
+    button {
+      padding: 10px 20px;
+      background-color: #28a745;
       color: white;
       border: none;
-      border-radius: 8px;
       cursor: pointer;
+      font-size: 16px;
     }
-
-    #earningsDisplay {
-      margin-top: 30px;
-      font-size: 20px;
-      color: #00b300;
+    button:hover {
+      background-color: #218838;
     }
-
-    #adFrame {
-      display: none;
-      width: 100%;
-      height: 300px;
-      border: none;
-      margin-top: 30px;
+    .earnings {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
     }
   </style>
 </head>
-<body>
-
-  <h2>🌟 ඔබේ Ad Panel එකට සාදරයෙන් පිළිගනිමු! 🌟</h2>
-
-  <div id="line"></div>
-
-  <button class="btn" id="playBtn">🎬 Play Ad</button>
-
-  <div id="earningsDisplay">ඔයාගේ උපයාගත් මුදල: <span id="earnings">0.00</span> LKR</div>
-
-  <iframe id="adFrame"></iframe>
-
-  <script>
-    let earnings = parseFloat(localStorage.getItem("earnings")) || 0;
+<body>  <h1>🎬 Play an Ad and Earn Money!</h1>
+  <button onclick="startAd()">▶️ Play Ad</button>
+  <div class="progress-bar">
+    <div class="progress" id="progress"></div>
+  </div>
+  <div class="earnings">
+    💸 Your Earnings: <span id="earnings">0.00</span> LKR
+  </div>  <!-- Adsterra Ad Script -->  <script type='text/javascript' src='//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js'></script>  <script>
+    let earnings = 0;
     const earningsDisplay = document.getElementById("earnings");
-    const playBtn = document.getElementById("playBtn");
-    const adFrame = document.getElementById("adFrame");
-    const line = document.getElementById("line");
 
-    earningsDisplay.textContent = earnings.toFixed(2);
-
-    playBtn.addEventListener("click", () => {
-      playBtn.disabled = true;
-      line.style.width = "0%";
-      adFrame.style.display = "none";
-
-      let percent = 0;
-      const interval = setInterval(() => {
-        percent += 33.4;
-        line.style.width = `${percent}%`;
-        if (percent >= 100) {
-          clearInterval(interval);
-
-          // Show ad
-          adFrame.src = "https://www.profitableratecpm.com/x1fu9w31j?key=9e56e55a3a3f57fab750d1c7a4c9fac4";
-          adFrame.style.display = "block";
-
-          // Add earnings
-          const amountPerAd = 0.50;
-          earnings += amountPerAd;
-          localStorage.setItem("earnings", earnings.toFixed(2));
+    // ✅ Get earnings from API on load
+    window.addEventListener("load", () => {
+      fetch("https://yourapi.com/get-earnings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ user: "0712345678" })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.total_earnings) {
+          earnings = parseFloat(data.total_earnings);
           earningsDisplay.textContent = earnings.toFixed(2);
-
-          // Optional: Send to your API
-          
-          fetch("708cb4ab7f83c2db54245f78c0de4473", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              user: "123",
-              amount: amountPerAd
-            })
-          });
-          
-
-          setTimeout(() => {
-            playBtn.disabled = false;
-          }, 5000);
         }
-      }, 1000); // 3 seconds
+      });
     });
-  </script>
-</body>
+
+    function startAd() {
+      let progress = document.getElementById("progress");
+      progress.style.width = "0%";
+      let width = 0;
+      let interval = setInterval(() => {
+        if (width >= 100) {
+          clearInterval(interval);
+          finishAd();
+        } else {
+          width += 1;
+          progress.style.width = width + "%";
+        }
+      }, 30); // ⏱️ 3 seconds total
+    }
+
+    function finishAd() {
+      const amountPerAd = 0.50;
+      earnings += amountPerAd;
+      earningsDisplay.textContent = earnings.toFixed(2);
+
+      // ✅ Save earnings to API
+      fetch("708cb4ab7f83c2db54245f78c0de4473", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          user: "0712345678",
+          amount: amountPerAd
+        })
+      });
+    }
+  </script></body>
 </html>
