@@ -2,50 +2,78 @@
 <html lang="si">
 <head>
   <meta charset="UTF-8">
-  <title>Adsterra Ad Player</title>
+  <title>Ad Play Panel</title>
   <style>
     body {
-      background-color: #2ecc71; /* කොළ පාට */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-      color: white;
-    }
-    h1 {
-      font-size: 32px;
-    }
-    #playBtn, #finalBtn {
       background-color: white;
-      color: green;
-      border: none;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      color: #27ae60;
+    }
+
+    #progressContainer {
+      width: 80%;
+      height: 20px;
+      background-color: #ddd;
+      margin: 30px auto;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #progressBar {
+      width: 0%;
+      height: 100%;
+      background-color: red;
+      transition: width 0.2s;
+    }
+
+    #playBtn, #finalBtn {
       padding: 15px 30px;
       font-size: 18px;
+      border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      margin-top: 20px;
     }
-    #playBtn.clicked {
-      background-color: red;
+
+    #playBtn {
+      background-color: green;
       color: white;
     }
+
+    #playBtn.clicked {
+      background-color: red;
+    }
+
     #message, #finalBtn {
       display: none;
-      margin-top: 20px;
+    }
+
+    #finalBtn {
+      background-color: orange;
+      color: white;
     }
   </style>
 </head>
 <body>
 
-  <h1>Ads Play Panel</h1>
+  <h1>Ad Play Panel</h1>
   <button id="playBtn">Play Ad</button>
-  <p id="message">Ad එක තප්පර 15 ක් බලා මෙතනට පැමිණෙන්න...</p>
+
+  <div id="progressContainer">
+    <div id="progressBar"></div>
+  </div>
+
+  <p id="message">Ad එක තප්පර 15ක් බලා මෙතනට පැමිණෙන්න...</p>
   <button id="finalBtn">Play Ad Now</button>
 
   <script>
     const playBtn = document.getElementById('playBtn');
+    const progressBar = document.getElementById('progressBar');
     const message = document.getElementById('message');
     const finalBtn = document.getElementById('finalBtn');
 
@@ -54,13 +82,20 @@
       playBtn.disabled = true;
       message.style.display = 'block';
 
-      setTimeout(() => {
-        finalBtn.style.display = 'inline-block';
-      }, 15000); // තප්පර 15 ක්
+      let width = 0;
+      let interval = setInterval(() => {
+        if (width >= 100) {
+          clearInterval(interval);
+          finalBtn.style.display = 'inline-block';
+        } else {
+          width += 1;
+          progressBar.style.width = width + '%';
+        }
+      }, 150); // 15 seconds = 100 * 150ms = 15000ms
     });
 
     finalBtn.addEventListener('click', () => {
-      // Adsterra Ad Script Trigger
+      // Trigger Adsterra ad
       var script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = '//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js';
