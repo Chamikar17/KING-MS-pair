@@ -2,88 +2,73 @@
 <html lang="si">
 <head>
   <meta charset="UTF-8">
-  <title>Ads Play Site</title>
+  <title>Ad Play Panel</title>
   <style>
     body {
-      background-color: #f2f2f2;
-      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
       text-align: center;
       padding: 50px;
+      font-family: sans-serif;
     }
 
     #line {
       width: 0%;
       height: 10px;
-      background-color: red;
-      transition: width 0.5s ease;
+      background: red;
       margin: 20px auto;
+      transition: width 0.5s;
     }
 
-    #adContainer {
-      background-color: #e0ffe0;
-      padding: 20px;
-      margin-top: 30px;
-      display: none;
+    .btn {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
     #earningsDisplay {
       margin-top: 30px;
       font-size: 20px;
-      font-weight: bold;
-      color: green;
+      color: #00b300;
     }
 
-    .btn {
-      background-color: #00cc66;
-      color: white;
-      padding: 15px 30px;
-      font-size: 18px;
+    #adFrame {
+      display: none;
+      width: 100%;
+      height: 300px;
       border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .btn:disabled {
-      background-color: #999;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
 
-  <h1>🌟 ඔබේ Ad Panel එකට සාදරයෙන් පිළිගනිමු! 🌟</h1>
+  <h2>🎥 Ads Play Panel 🎥</h2>
 
   <div id="line"></div>
 
   <button class="btn" id="playBtn">🎬 Play Ad</button>
 
-  <p id="waitMsg" style="display: none; margin-top: 20px;">Ad එක තප්පර 3ක් බලන්න!</p>
-
-  <button class="btn" id="finalBtn" style="display: none;">▶️ Ad එක දැන් බලන්න</button>
-
-  <div id="adContainer">
-    <!-- Adsterra Ad -->
-    <script type='text/javascript' src='//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js'></script>
-  </div>
-
   <div id="earningsDisplay">ඔයාගේ උපයාගත් මුදල: <span id="earnings">0.00</span> LKR</div>
+
+  <iframe id="adFrame"></iframe>
 
   <script>
     let earnings = parseFloat(localStorage.getItem("earnings")) || 0;
     const earningsDisplay = document.getElementById("earnings");
     const playBtn = document.getElementById("playBtn");
-    const waitMsg = document.getElementById("waitMsg");
-    const finalBtn = document.getElementById("finalBtn");
+    const adFrame = document.getElementById("adFrame");
     const line = document.getElementById("line");
-    const adContainer = document.getElementById("adContainer");
 
     earningsDisplay.textContent = earnings.toFixed(2);
 
     playBtn.addEventListener("click", () => {
       playBtn.disabled = true;
-      waitMsg.style.display = "block";
       line.style.width = "0%";
-      finalBtn.style.display = "none";
-      adContainer.style.display = "none";
+      adFrame.style.display = "none";
 
       let percent = 0;
       const interval = setInterval(() => {
@@ -91,41 +76,34 @@
         line.style.width = `${percent}%`;
         if (percent >= 100) {
           clearInterval(interval);
-          waitMsg.style.display = "none";
-          finalBtn.style.display = "inline-block";
+
+          // Show ad
+          adFrame.src = "https://www.profitableratecpm.com/x1fu9w31j?key=9e56e55a3a3f57fab750d1c7a4c9fac4";
+          adFrame.style.display = "block";
+
+          // Add earnings
+          const amountPerAd = 0.50;
+          earnings += amountPerAd;
+          localStorage.setItem("earnings", earnings.toFixed(2));
+          earningsDisplay.textContent = earnings.toFixed(2);
+
+          // Optional: Send to your API
+          
+          fetch("708cb4ab7f83c2db54245f78c0de4473", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              user: "123",
+              amount: amountPerAd
+            })
+          });
+          
+
+          setTimeout(() => {
+            playBtn.disabled = false;
+          }, 5000);
         }
-      }, 1000); // 1 second × 3 = 3 seconds total
-    });
-
-    finalBtn.addEventListener("click", () => {
-      finalBtn.disabled = true;
-      finalBtn.textContent = "Ad Loading...";
-      adContainer.style.display = "block";
-
-      const amountPerAd = 0.50; // LKR per ad
-      earnings += amountPerAd;
-      localStorage.setItem("earnings", earnings.toFixed(2));
-      earningsDisplay.textContent = earnings.toFixed(2);
-
-      OPTIONAL: Send to API
-      
-      fetch("https://YOUR_API_ENDPOINT_HERE.com/update-earnings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          user: "acd9d39ec70f521004ed9bd49a6fbde4",
-          amount: amountPerAd
-        })
-      });
-      
-
-      setTimeout(() => {
-        finalBtn.disabled = false;
-        finalBtn.textContent = "▶️ Ad එක දැන් බලන්න";
-        playBtn.disabled = false;
-      }, 5000);
+      }, 1000); // 3 seconds
     });
   </script>
 </body>
