@@ -51,20 +51,16 @@ button:hover:not(:disabled) {
 }
 
 .owner-btn {
-  margin-bottom: 50px;
-  display: block;
-  background-color: #6a00ff; /* Purple base */
-  color: #fff;
-  padding: 12px 24px;
-  font-size: 18px;
+  background-color: #28a745; /* හරිත (green) */
+  color: white;
+  padding: 10px 20px;
+  margin-bottom: 10px;  /* එකෙන් එකට gap එක */
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
+  width: 200px;
   cursor: pointer;
-  width: 100%;
-  text-transform: uppercase;
   font-weight: bold;
-  box-shadow: 0 0 10px #6a00ff, 0 0 20px #6a00ff; /* Purple glow */
-  transition: 0.3s ease-in-out;
+  text-transform: uppercase;
 }
 
 button:disabled {
