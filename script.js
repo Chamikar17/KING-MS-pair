@@ -7,6 +7,7 @@ let adWindow = null;
 let timer = null;
 let count = 0;
 const adDuration = 15; // seconds
+let pointAdded = false;
 
 watchBtn.addEventListener("click", () => {
   if(adWindow && !adWindow.closed){
@@ -28,6 +29,7 @@ watchBtn.addEventListener("click", () => {
   // Disable button & reset progress
   watchBtn.disabled = true;
   count = 0;
+  pointAdded = false;
   progressBar.style.width = "0%";
 
   // Start timer
@@ -35,23 +37,19 @@ watchBtn.addEventListener("click", () => {
     count++;
     progressBar.style.width = ((count / adDuration) * 100) + "%";
 
-    // After 15 seconds, award point & enable button
-    if(count >= adDuration){
-      clearInterval(timer);
-      if(adWindow && !adWindow.closed){
-        alert("Please close the ad tab to claim your point.");
-      } else {
-        addPoint();
-      }
+    // After 15 seconds, add point if not already added
+    if(count >= adDuration && !pointAdded){
+      addPoint();
+      pointAdded = true;
+      alert("15 seconds passed! Close the ad tab to confirm your point.");
     }
   }, 1000);
 });
 
-// Check every second if adWindow closed to give point
+// Check every second if adWindow closed to enable button
 setInterval(() => {
   if(adWindow && adWindow.closed){
     clearInterval(timer);
-    addPoint();
     watchBtn.disabled = false;
     progressBar.style.width = "0%";
     adWindow = null;
@@ -61,4 +59,4 @@ setInterval(() => {
 function addPoint(){
   points++;
   pointsSpan.textContent = points;
-}
+  }
