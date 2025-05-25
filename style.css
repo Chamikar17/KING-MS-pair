@@ -1,66 +1,73 @@
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
   text-align: center;
+  margin: 0;
+  padding: 40px 10px;
 }
 
 .container {
-  max-width: 400px;
-  margin: 80px auto;
   background: white;
-  border-radius: 12px;
+  max-width: 400px;
+  margin: 0 auto;
   padding: 30px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
 }
 
 h1 {
-  color: #444;
   margin-bottom: 20px;
+  color: #333;
+}
+
+.progress-box {
+  width: 100%;
+  height: 25px;
+  background-color: #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0;
+  background-color: #4caf50;
+  transition: width 0.3s linear;
 }
 
 .points {
   font-size: 18px;
-  margin: 15px 0;
+  margin-bottom: 25px;
+  color: #222;
 }
 
 #watchAdBtn {
-  background-color: #00c853;
-  color: white;
+  font-size: 18px;
+  padding: 12px 25px;
   border: none;
-  padding: 15px 30px;
-  font-size: 16px;
   border-radius: 8px;
+  background-color: #007bff;
+  color: white;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-#watchAdBtn:hover {
-  background-color: #009624;
+#watchAdBtn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+#watchAdBtn:hover:not(:disabled) {
+  background-color: #0056b3;
 }
 
 .owner-btn {
   display: inline-block;
   margin-top: 20px;
   color: white;
-  background-color: #2962ff;
+  background-color: #28a745;
   padding: 10px 20px;
-  text-decoration: none;
   border-radius: 8px;
-}
-
-.progress-box {
-  width: 100%;
-  background-color: #ddd;
-  border-radius: 10px;
-  margin: 20px 0;
-  height: 20px;
-  overflow: hidden;
-}
-
-#progressBar {
-  height: 100%;
-  width: 0%;
-  background-color: #4caf50;
-  transition: width 0.3s;
+  text-decoration: none;
 }
