@@ -54,7 +54,7 @@ button:hover:not(:disabled) {
   background-color: #28a745; /* හරිත (green) */
   color: white;
   padding: 10px 20px;
-  margin-bottom: 20px;  /* එකෙන් එකට gap එක */
+  margin-bottom: 50px;  /* එකෙන් එකට gap එක */
   border: none;
   border-radius: 6px;
   width: 200px;
