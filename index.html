@@ -1,8 +1,9 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ad Watch and Earn</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ad Play & Earn</title>
   <style>
     body {
       font-family: sans-serif;
@@ -13,7 +14,8 @@
     .progress-container {
       background-color: white;
       border: 4px solid #28a745;
-      width: 100%;
+      width: 90%;
+      max-width: 400px;
       height: 30px;
       margin: 20px auto;
       border-radius: 10px;
@@ -23,6 +25,7 @@
       height: 100%;
       background-color: #28a745;
       width: 0%;
+      transition: width 0.1s;
     }
     button {
       padding: 10px 20px;
@@ -45,20 +48,34 @@
   </style>
 </head>
 <body>
-  <h1>🎬 Watch Ad to Earn Points</h1>
-  <button onclick="startAd()">▶️ Play Ad</button>
+
+  <h1>🎬 Watch Ad & Earn Points</h1>
+
+  <button onclick="playAd()">▶️ Play Ad</button>
+
   <div class="progress-container">
     <div class="progress" id="progress"></div>
   </div>
+
   <div class="points">
     🔁 Points Earned: <span id="points">0</span> / 100
-  </div>  <div class="owner-link">
+  </div>
+
+  <div class="owner-link">
     <button onclick="window.open('https://wa.me/+94767861594?text=HELLO👋+ads+playe+🙂')">📲 Owner</button>
-  </div>  <!-- Adsterra Ad Script -->  <script type='text/javascript' src='//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js'></script>  <script>
+  </div>
+
+  <!-- Adsterra Popup Ad URL (use your own) -->
+  <!-- This opens as popup -->
+  <script>
     let points = 0;
     const pointsDisplay = document.getElementById("points");
 
-    function startAd() {
+    function playAd() {
+      // Open ad in a new tab
+      window.open('https://www.profitableratecpm.com/x1fu9w31j?key=9e56e55a3a3f57fab750d1c7a4c9fac4', '_blank');
+
+      // Start 15-second timer
       let progressBar = document.getElementById("progress");
       let width = 0;
       let secondsWatched = 0;
@@ -72,11 +89,13 @@
             pointsDisplay.textContent = points;
           }
         } else {
-          width += 0.67; // About 15 seconds total
+          width += 0.67; // completes in ~15s
           secondsWatched += 0.1;
           progressBar.style.width = width + "%";
         }
       }, 100);
     }
-  </script></body>
+  </script>
+
+</body>
 </html>
