@@ -15,9 +15,9 @@ body {
 
 .container {
   max-width: 400px;
-  margin: 90px auto;
+  margin: 100px auto;
   background: white;
-  padding: 70px;
+  padding: 8ප්px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
 }
@@ -51,6 +51,7 @@ button:hover:not(:disabled) {
 }
 
 .owner-btn {
+  margin-bottom: 20px;
   background-color: #6a00ff; /* Purple base */
   color: #fff;
   padding: 12px 24px;
