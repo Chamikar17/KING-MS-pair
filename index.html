@@ -2,23 +2,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ad Earnings Tracker</title>
+  <title>Ad Watch and Earn</title>
   <style>
     body {
       font-family: sans-serif;
       background-color: #f2f2f2;
       text-align: center;
-      padding: 50px;
+      padding: 40px;
     }
-    .progress-bar {
+    .progress-container {
+      background-color: white;
+      border: 4px solid #28a745;
       width: 100%;
-      background-color: #ddd;
-      height: 20px;
-      margin: 20px 0;
+      height: 30px;
+      margin: 20px auto;
+      border-radius: 10px;
+      overflow: hidden;
     }
     .progress {
       height: 100%;
-      background-color: red;
+      background-color: #28a745;
       width: 0%;
     }
     button {
@@ -28,77 +31,52 @@
       border: none;
       cursor: pointer;
       font-size: 16px;
+      border-radius: 5px;
+      margin: 10px;
     }
-    button:hover {
-      background-color: #218838;
-    }
-    .earnings {
+    .points {
       margin-top: 20px;
-      font-size: 18px;
+      font-size: 22px;
       color: #333;
+    }
+    .owner-link {
+      margin-top: 30px;
     }
   </style>
 </head>
-<body>  <h1>🎬 Play an Ad and Earn Money!</h1>
+<body>
+  <h1>🎬 Watch Ad to Earn Points</h1>
   <button onclick="startAd()">▶️ Play Ad</button>
-  <div class="progress-bar">
+  <div class="progress-container">
     <div class="progress" id="progress"></div>
   </div>
-  <div class="earnings">
-    💸 Your Earnings: <span id="earnings">0.00</span> LKR
+  <div class="points">
+    🔁 Points Earned: <span id="points">0</span> / 100
+  </div>  <div class="owner-link">
+    <button onclick="window.open('https://wa.me/+94767861594?text=HELLO👋+ads+playe+🙂')">📲 Owner</button>
   </div>  <!-- Adsterra Ad Script -->  <script type='text/javascript' src='//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js'></script>  <script>
-    let earnings = 0;
-    const earningsDisplay = document.getElementById("earnings");
-
-    // ✅ Get earnings from API on load
-    window.addEventListener("load", () => {
-      fetch("https://yourapi.com/get-earnings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ user: "0712345678" })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.total_earnings) {
-          earnings = parseFloat(data.total_earnings);
-          earningsDisplay.textContent = earnings.toFixed(2);
-        }
-      });
-    });
+    let points = 0;
+    const pointsDisplay = document.getElementById("points");
 
     function startAd() {
-      let progress = document.getElementById("progress");
-      progress.style.width = "0%";
+      let progressBar = document.getElementById("progress");
       let width = 0;
+      let secondsWatched = 0;
+      progressBar.style.width = "0%";
+
       let interval = setInterval(() => {
         if (width >= 100) {
           clearInterval(interval);
-          finishAd();
+          if (secondsWatched >= 15 && points < 100) {
+            points++;
+            pointsDisplay.textContent = points;
+          }
         } else {
-          width += 1;
-          progress.style.width = width + "%";
+          width += 0.67; // About 15 seconds total
+          secondsWatched += 0.1;
+          progressBar.style.width = width + "%";
         }
-      }, 30); // ⏱️ 3 seconds total
-    }
-
-    function finishAd() {
-      const amountPerAd = 0.50;
-      earnings += amountPerAd;
-      earningsDisplay.textContent = earnings.toFixed(2);
-
-      // ✅ Save earnings to API
-      fetch("708cb4ab7f83c2db54245f78c0de4473", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          user: "0712345678",
-          amount: amountPerAd
-        })
-      });
+      }, 100);
     }
   </script></body>
 </html>
