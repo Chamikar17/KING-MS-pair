@@ -28,7 +28,7 @@
       width: 0%;
       height: 100%;
       background-color: red;
-      transition: width 0.2s;
+      transition: width 0.1s;
     }
 
     #playBtn, #finalBtn {
@@ -57,6 +57,10 @@
       background-color: orange;
       color: white;
     }
+
+    #adContainer {
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
@@ -68,8 +72,12 @@
     <div id="progressBar"></div>
   </div>
 
-  <p id="message">Ad එක තප්පර 15ක් බලා මෙතනට පැමිණෙන්න...</p>
+  <p id="message">Ad එක තප්පර 15 ක් බලන්න, Loding ad කියන එක උඩත් ඔබන්න ⏳... </p>
   <button id="finalBtn">Play Ad Now</button>
+
+  <div id="adContainer">
+    <!-- Ads will appear here -->
+  </div>
 
   <script>
     const playBtn = document.getElementById('playBtn');
@@ -88,21 +96,54 @@
           clearInterval(interval);
           finalBtn.style.display = 'inline-block';
         } else {
-          width += 1;
+          width += 5;
           progressBar.style.width = width + '%';
         }
-      }, 150); // 15 seconds = 100 * 150ms = 15000ms
+      }, 30); // ~3 seconds total
     });
 
     finalBtn.addEventListener('click', () => {
-      // Trigger Adsterra ad
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = '//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js';
-      document.body.appendChild(script);
-
       finalBtn.disabled = true;
-      finalBtn.textContent = "Ad Loading...";
+      finalBtn.textContent = "⏳ Ad Loading... ⏳";
+
+      // ✅ Adsterra Ad 1
+      var ad1 = document.createElement('script');
+      ad1.type = 'text/javascript';
+      ad1.src = '//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js';
+      document.body.appendChild(ad1);
+
+      // ✅ Adsterra Ad 2
+      var ad2 = document.createElement('script');
+      ad2.type = 'text/javascript';
+      ad2.src = '//pl26741553.profitableratecpm.com/9f/4b/58/9f4b587c49028a47a7821fd8dca12e80.js';
+      document.body.appendChild(ad2);
+
+      // ✅ Adsterra Ad 3 (via iframe)
+      var atOptions = {
+        'key': 'e42fa73e5c10082289e03e1ab4085928',
+        'format': 'iframe',
+        'height': 60,
+        'width': 468,
+        'params': {}
+      };
+      var ad3 = document.createElement('script');
+      ad3.type = 'text/javascript';
+      ad3.src = '//www.highperformanceformat.com/e42fa73e5c10082289e03e1ab4085928/invoke.js';
+      document.getElementById('adContainer').appendChild(ad3);
+
+      // ✅ Adsterra Ad 4 (container-based)
+      var ad4Script = document.createElement('script');
+      ad4Script.async = true;
+      ad4Script.setAttribute('data-cfasync', 'false');
+      ad4Script.src = '//pl26741533.profitableratecpm.com/febc4ecb6bdea8233a5c4bc3e5816b9a/invoke.js';
+      document.body.appendChild(ad4Script);
+
+      var ad4Div = document.createElement('div');
+      ad4Div.id = 'container-febc4ecb6bdea8233a5c4bc3e5816b9a';
+      document.getElementById('adContainer').appendChild(ad4Div);
+
+      // ✅ Profitablerate CPM direct link (optional trigger)
+      window.open('https://www.profitableratecpm.com/x1fu9w31j?key=9e56e55a3a3f57fab750d1c7a4c9fac4', '_blank');
     });
   </script>
 
