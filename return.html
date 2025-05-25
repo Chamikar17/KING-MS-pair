@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ad Watched</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>✅ You watched the ad!</h1>
+  <h2>🎉 You earned 1 point</h2>
+  <a href="index.html">🔙 Go Back</a>
+
+  <script>
+    let points = localStorage.getItem("points") || 0;
+    points = parseInt(points) + 1;
+    localStorage.setItem("points", points);
+  </script>
+</body>
+</html>
