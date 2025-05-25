@@ -7,7 +7,7 @@ btn.addEventListener("click", () => {
   btn.disabled = true;
   progressBar.style.width = "0%";
 
-  let duration = 15; // seconds
+  let duration = 2; // seconds
   let current = 0;
 
   const interval = setInterval(() => {
@@ -27,4 +27,6 @@ btn.addEventListener("click", () => {
 
 function openAd() {
   window.open("https://www.profitableratecpm.com/x1fu9w31j?key=9e56e55a3a3f57fab750d1c7a4c9fac4", "_blank");
+
+
 }
