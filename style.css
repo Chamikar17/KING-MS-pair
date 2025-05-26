@@ -8,10 +8,10 @@ body {
 .container {
   max-width: 400px;
   margin: 50px auto;
-  background: white;
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  /* background removed */
+  /* box-shadow removed too if you want it fully invisible */
 }
 
 h1 {
