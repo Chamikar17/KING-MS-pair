@@ -3,23 +3,24 @@ body {
   margin: 0;
   padding: 20px;
   text-align: center;
+  background: transparent;
 }
 
 .container {
   max-width: 400px;
   margin: 50px auto;
-  padding: 30px;
+  padding: 20px;
   border-radius: 8px;
-  /* background removed */
-  /* box-shadow removed too if you want it fully invisible */
+  /* Remove background and shadow to keep it clean */
 }
 
 h1 {
   margin-bottom: 20px;
+  font-size: 24px;
 }
 
 .points-container {
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
@@ -59,4 +60,33 @@ button:disabled {
   width: 0;
   background-color: #4caf50;
   transition: width 1s linear;
+}
+
+/* 🔽 Optional: Mobile-specific tweaks */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    margin: 30px 10px;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .points-container {
+    font-size: 18px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .progress-wrapper {
+    height: 20px;
+  }
 }
