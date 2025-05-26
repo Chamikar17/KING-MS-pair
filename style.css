@@ -83,3 +83,11 @@ button:disabled {
   background-color: #4caf50;
   transition: width 1s linear;
 }
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
