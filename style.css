@@ -3,36 +3,37 @@ body {
   margin: 0;
   padding: 20px;
   text-align: center;
-  background: transparent;
+  font-size: 20px;
 }
 
 .container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 8px;
-  /* Remove background and shadow to keep it clean */
+  max-width: 450px;
+  margin: 40px auto;
+  background: white;
+  padding: 40px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
 }
 
 h1 {
-  margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 28px;
+  margin-bottom: 25px;
 }
 
 .points-container {
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 24px;
+  margin-bottom: 25px;
 }
 
 button {
   background-color: #4CAF50;
   border: none;
   color: white;
-  padding: 12px 24px;
-  font-size: 18px;
-  border-radius: 6px;
+  padding: 16px 28px;
+  font-size: 20px;
+  border-radius: 8px;
   cursor: pointer;
-  margin: 10px 0;
+  margin: 12px 0;
   width: 100%;
   transition: background-color 0.3s;
 }
@@ -48,11 +49,11 @@ button:disabled {
 
 .progress-wrapper {
   width: 100%;
-  height: 25px;
+  height: 30px;
   background-color: #ddd;
-  border-radius: 12px;
+  border-radius: 15px;
   overflow: hidden;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 #progressBar {
@@ -62,31 +63,26 @@ button:disabled {
   transition: width 1s linear;
 }
 
-/* 🔽 Optional: Mobile-specific tweaks */
-@media (max-width: 480px) {
-  body {
-    padding: 10px;
-  }
-
-  .container {
-    margin: 30px 10px;
-    padding: 15px;
-  }
-
+/* Extra Responsive Adjustments */
+@media screen and (max-width: 480px) {
   h1 {
-    font-size: 20px;
+    font-size: 30px;
   }
 
   .points-container {
-    font-size: 18px;
+    font-size: 26px;
   }
 
   button {
-    font-size: 16px;
-    padding: 10px 20px;
+    font-size: 22px;
+    padding: 18px 30px;
+  }
+
+  .container {
+    padding: 35px 20px;
   }
 
   .progress-wrapper {
-    height: 20px;
+    height: 32px;
   }
 }
