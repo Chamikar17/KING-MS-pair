@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Auto Ads Play</title>
+  <title>Auto Ads Player</title>
   <style>
     body {
       background-color: #111;
@@ -14,7 +14,7 @@
     }
 
     button {
-      background-color: #28a745;
+      background-color: #ff5722;
       color: white;
       border: none;
       padding: 14px 28px;
@@ -25,45 +25,45 @@
 
     #countdown {
       margin-top: 20px;
-      font-size: 22px;
+      font-size: 20px;
     }
 
-    #ad-zone {
+    #ad-container {
       margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <h1>🎬 Auto Ad Player</h1>
-  <button id="startBtn">Start Auto Ads</button>
+  <h1>🎬 Auto Ads Player</h1>
+  <button id="startBtn">Start Watching Ad</button>
   <div id="countdown"></div>
-  <div id="ad-zone"></div>
+  <div id="ad-container"></div>
 
   <script>
     const startBtn = document.getElementById("startBtn");
     const countdown = document.getElementById("countdown");
-    const adZone = document.getElementById("ad-zone");
+    const adContainer = document.getElementById("ad-container");
 
     startBtn.addEventListener("click", () => {
       startBtn.disabled = true;
       startBtn.innerText = "Ad Playing...";
 
-      // ✅ 1. Load Adsterra display ad (no popup)
+      // ✅ Load ad script without popup blocker issues
       const adScript = document.createElement("script");
       adScript.type = "text/javascript";
-      adScript.src = "//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js";
-      adZone.appendChild(adScript);
+      adScript.src = "//pl26741553.profitableratecpm.com/9f/4b/58/9f4b587c49028a47a7821fd8dca12e80.js";
+      adContainer.appendChild(adScript);
 
-      // ✅ 2. Start 18s countdown
+      // ⏱ Start countdown
       let seconds = 18;
       countdown.innerText = `Redirecting in ${seconds}s...`;
+
       const timer = setInterval(() => {
         seconds--;
         countdown.innerText = `Redirecting in ${seconds}s...`;
         if (seconds <= 0) {
           clearInterval(timer);
-          // ✅ 3. Redirect to home.html or another page
-          window.location.href = "home.html";
+          window.location.href = "home.html"; // ✅ redirect to home
         }
       }, 1000);
     });
