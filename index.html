@@ -3,38 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ad View Site</title>
+  <title>Ad View</title>
   <style>
     body {
-      background-color: #111;
+      background-color: #121212;
       color: #fff;
       font-family: sans-serif;
       text-align: center;
       padding-top: 50px;
     }
-
     button {
-      background: #00c853;
-      color: white;
-      font-size: 18px;
-      padding: 12px 24px;
+      background-color: #00c853;
       border: none;
-      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 6px;
+      color: #fff;
       cursor: pointer;
     }
-
     #countdown {
       margin-top: 20px;
       font-size: 20px;
     }
-
     #ad-container {
       margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <h1>🎥 Watch Ad to Continue</h1>
+  <h1>📺 Watch Ad to Continue</h1>
   <button id="startBtn">Start Ad</button>
   <div id="countdown"></div>
   <div id="ad-container"></div>
@@ -48,22 +45,15 @@
       startBtn.disabled = true;
       startBtn.innerText = "Ad Playing...";
 
-      // ✅ Load IFRAME ad
-      const adDiv = document.createElement("div");
-      adDiv.id = "ad-banner";
-      adDiv.innerHTML = `
-        <script type="text/javascript">
-          atOptions = {
-            'key' : 'e42fa73e5c10082289e03e1ab4085928',
-            'format' : 'iframe',
-            'height' : 60,
-            'width' : 468,
-            'params' : {}
-          };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/e42fa73e5c10082289e03e1ab4085928/invoke.js"></script>
-      `;
-      adContainer.appendChild(adDiv);
+      // ✅ Insert IFRAME ad directly
+      const iframe = document.createElement("iframe");
+      iframe.src = "https://www.highperformanceformat.com/e42fa73e5c10082289e03e1ab4085928/invoke.html";
+      iframe.width = "468";
+      iframe.height = "60";
+      iframe.frameBorder = "0";
+      iframe.scrolling = "no";
+      iframe.style.border = "none";
+      adContainer.appendChild(iframe);
 
       // ⏱ Countdown
       let seconds = 18;
@@ -73,7 +63,7 @@
         countdown.innerText = `Redirecting in ${seconds}s...`;
         if (seconds <= 0) {
           clearInterval(timer);
-          window.location.href = "home.html"; // ✅ redirect
+          window.location.href = "home.html"; // ✅ redirect to home
         }
       }, 1000);
     });
