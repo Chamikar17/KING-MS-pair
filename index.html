@@ -2,61 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Auto Ad Play</title>
   <style>
     body {
       background-color: #121212;
       color: #fff;
-      text-align: center;
-      padding-top: 50px;
       font-family: sans-serif;
+      text-align: center;
+      padding: 50px 20px;
     }
-
     button {
-      background: #00c853;
-      color: white;
-      font-size: 18px;
-      padding: 12px 24px;
+      background-color: #00c853;
       border: none;
+      color: white;
+      padding: 14px 30px;
+      font-size: 18px;
       border-radius: 6px;
       cursor: pointer;
     }
-
     #countdown {
       margin-top: 20px;
-      font-size: 20px;
+      font-size: 22px;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 Click to Watch Ad</h1>
+  <h1>🚀 Click to Play Ad</h1>
   <button id="startBtn">Start Ad</button>
   <div id="countdown"></div>
 
   <script>
-    const startBtn = document.getElementById("startBtn");
-    const countdown = document.getElementById("countdown");
+    const startBtn = document.getElementById('startBtn');
+    const countdown = document.getElementById('countdown');
 
-    startBtn.addEventListener("click", () => {
+    startBtn.addEventListener('click', () => {
       startBtn.disabled = true;
-      startBtn.innerText = "Ad Playing...";
+      startBtn.textContent = 'Ad Playing...';
 
-      // ✅ Inject Ad script
-      const adScript = document.createElement("script");
-      adScript.type = "text/javascript";
-      adScript.src = "//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js";
+      // Inject Ad Script (from profitableratecpm.com)
+      const adScript = document.createElement('script');
+      adScript.type = 'text/javascript';
+      adScript.src = '//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js';
       document.body.appendChild(adScript);
 
-      // ⏱ Countdown
+      // Countdown 18 seconds, then redirect
       let seconds = 18;
-      countdown.innerText = `Redirecting in ${seconds}s...`;
+      countdown.textContent = `Redirecting in ${seconds} seconds...`;
       const timer = setInterval(() => {
         seconds--;
-        countdown.innerText = `Redirecting in ${seconds}s...`;
+        countdown.textContent = `Redirecting in ${seconds} seconds...`;
         if (seconds <= 0) {
           clearInterval(timer);
-          window.location.href = "home.html"; // redirect
+          window.location.href = '/home.html';  // Redirect to home.html
         }
       }, 1000);
     });
