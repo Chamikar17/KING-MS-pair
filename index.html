@@ -49,19 +49,18 @@
 
     startBtn.addEventListener("click", () => {
       startBtn.style.display = "none";
-      playAdWithCountdown();
-    });
-
-    function playAdWithCountdown() {
       adContainer.classList.remove("hidden");
 
-      // ✅ Inject Adsterra popup ad script dynamically
+      // 🧨 Force open new tab or popup (may be blocked by browser)
+      window.open("https://google.com", "_blank", "width=500,height=500");
+
+      // 🪄 Inject ad script dynamically
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = '//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js';
       document.body.appendChild(script);
 
-      // ⏱️ Countdown logic
+      // ⏱ Countdown
       let timeLeft = 18;
       countdownText.innerText = `Ad will end in ${timeLeft}s...`;
 
@@ -71,10 +70,10 @@
 
         if (timeLeft <= 0) {
           clearInterval(adInterval);
-          location.reload(); // 🔁 Reload to replay ad
+          location.reload(); // 🔁 Loop
         }
       }, 1000);
-    }
+    });
   </script>
 </body>
 </html>
