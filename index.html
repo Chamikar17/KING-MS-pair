@@ -1,25 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Ad Play & Earn</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Auto Ads Player</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    button {
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #countdown {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🎬 Watch Ads & Earn Points</h1>
+  <h1>Auto Ads Player</h1>
+  <button id="startBtn">Auto Play Ads</button>
 
-    <div class="progress-box">
-      <div id="progressBar"></div>
-    </div>
-
-    <p class="points">You have: <span id="points">0</span> Points</p>
-
-    <button id="watchAdBtn">▶️ Play Ad</button>
-
-    <a href="https://wa.me/+94767861594?text=HELLO👋+ads+playe+🙂" class="owner-btn">👑 Owner</a>
+  <div id="adContainer" class="hidden">
+    <p id="countdown">Ad will end in 18s...</p>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    const startBtn = document.getElementById("startBtn");
+    const adContainer = document.getElementById("adContainer");
+    const countdownText = document.getElementById("countdown");
+    let adInterval;
+
+    startBtn.addEventListener("click", () => {
+      startBtn.style.display = "none";
+      playAdWithCountdown();
+    });
+
+    function playAdWithCountdown() {
+      adContainer.classList.remove("hidden");
+
+      // ✅ Inject Adsterra popup ad script dynamically
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = '//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js';
+      document.body.appendChild(script);
+
+      // ⏱️ Countdown logic
+      let timeLeft = 18;
+      countdownText.innerText = `Ad will end in ${timeLeft}s...`;
+
+      adInterval = setInterval(() => {
+        timeLeft--;
+        countdownText.innerText = `Ad will end in ${timeLeft}s...`;
+
+        if (timeLeft <= 0) {
+          clearInterval(adInterval);
+          location.reload(); // 🔁 Reload to replay ad
+        }
+      }, 1000);
+    }
+  </script>
 </body>
 </html>
