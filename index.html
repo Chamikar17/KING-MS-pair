@@ -3,74 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Auto Ads Player</title>
+  <title>Auto Ads Play</title>
   <style>
     body {
       background-color: #111;
       color: white;
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       text-align: center;
       padding-top: 50px;
     }
 
     button {
-      background-color: #1e90ff;
+      background-color: #28a745;
       color: white;
       border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
+      padding: 14px 28px;
       font-size: 18px;
+      border-radius: 8px;
       cursor: pointer;
     }
 
     #countdown {
-      font-size: 20px;
       margin-top: 20px;
+      font-size: 22px;
     }
 
-    .hidden {
-      display: none;
+    #ad-zone {
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <h1>Auto Ads Player</h1>
-  <button id="startBtn">Auto Play Ads</button>
-
-  <div id="adContainer" class="hidden">
-    <p id="countdown">Ad will end in 18s...</p>
-  </div>
+  <h1>🎬 Auto Ad Player</h1>
+  <button id="startBtn">Start Auto Ads</button>
+  <div id="countdown"></div>
+  <div id="ad-zone"></div>
 
   <script>
     const startBtn = document.getElementById("startBtn");
-    const adContainer = document.getElementById("adContainer");
-    const countdownText = document.getElementById("countdown");
-    let adInterval;
+    const countdown = document.getElementById("countdown");
+    const adZone = document.getElementById("ad-zone");
 
     startBtn.addEventListener("click", () => {
-      startBtn.style.display = "none";
-      adContainer.classList.remove("hidden");
+      startBtn.disabled = true;
+      startBtn.innerText = "Ad Playing...";
 
-      // 🧨 Force open new tab or popup (may be blocked by browser)
-      window.open("https://google.com", "_blank", "width=500,height=500");
+      // ✅ 1. Load Adsterra display ad (no popup)
+      const adScript = document.createElement("script");
+      adScript.type = "text/javascript";
+      adScript.src = "//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js";
+      adZone.appendChild(adScript);
 
-      // 🪄 Inject ad script dynamically
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = '//pl26741433.profitableratecpm.com/d3/ec/0f/d3ec0fad5db95b6cef9553c219c8b8b4.js';
-      document.body.appendChild(script);
-
-      // ⏱ Countdown
-      let timeLeft = 18;
-      countdownText.innerText = `Ad will end in ${timeLeft}s...`;
-
-      adInterval = setInterval(() => {
-        timeLeft--;
-        countdownText.innerText = `Ad will end in ${timeLeft}s...`;
-
-        if (timeLeft <= 0) {
-          clearInterval(adInterval);
-          location.reload(); // 🔁 Loop
+      // ✅ 2. Start 18s countdown
+      let seconds = 18;
+      countdown.innerText = `Redirecting in ${seconds}s...`;
+      const timer = setInterval(() => {
+        seconds--;
+        countdown.innerText = `Redirecting in ${seconds}s...`;
+        if (seconds <= 0) {
+          clearInterval(timer);
+          // ✅ 3. Redirect to home.html or another page
+          window.location.href = "home.html";
         }
       }, 1000);
     });
